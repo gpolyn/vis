@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-10-13
+ * @date    2015-10-22
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -6684,6 +6684,7 @@ return /******/ (function(modules) { // webpackBootstrap
     }
 
     this.whichXToHighlight = whichX;
+    this.hideZAxis = false;
 
     // create variables and set default values
     this.containerElement = container;
@@ -7476,6 +7477,10 @@ return /******/ (function(modules) { // webpackBootstrap
       if (options.yValueLabel !== undefined) this.yValueLabel = options.yValueLabel;
       if (options.zValueLabel !== undefined) this.zValueLabel = options.zValueLabel;
 
+      // custom options
+      if (options.dataBarRedrawOptions !== undefined) this.dataBarRedrawOptions = options.dataBarRedrawOptions;
+      if (options.hideZAxis !== undefined) this.hideZAxis = options.hideZAxis;
+
       if (options.style !== undefined) {
         var styleNumber = this._getStyleNumber(options.style);
         if (styleNumber !== -1) {
@@ -7894,39 +7899,42 @@ return /******/ (function(modules) { // webpackBootstrap
     }
 
     // draw z-grid lines and axis
-    ctx.lineWidth = 1;
-    prettyStep = this.defaultZStep === undefined;
-    step = new StepNumber(this.zMin, this.zMax, this.zStep, prettyStep);
-    step.start();
-    if (step.getCurrent() < this.zMin) {
-      step.next();
-    }
-    xText = Math.cos(armAngle) > 0 ? this.xMin : this.xMax;
-    yText = Math.sin(armAngle) < 0 ? this.yMin : this.yMax;
-    while (!step.end()) {
-      // TODO: make z-grid lines really 3d?
-      from = this._convert3Dto2D(new Point3d(xText, yText, step.getCurrent()));
+    if (!this.hideZAxis) {
+      // whichX
+      ctx.lineWidth = 1;
+      prettyStep = this.defaultZStep === undefined;
+      step = new StepNumber(this.zMin, this.zMax, this.zStep, prettyStep);
+      step.start();
+      if (step.getCurrent() < this.zMin) {
+        step.next();
+      }
+      xText = Math.cos(armAngle) > 0 ? this.xMin : this.xMax;
+      yText = Math.sin(armAngle) < 0 ? this.yMin : this.yMax;
+      while (!step.end()) {
+        // TODO: make z-grid lines really 3d?
+        from = this._convert3Dto2D(new Point3d(xText, yText, step.getCurrent()));
+        ctx.strokeStyle = this.axisColor;
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(from.x - textMargin, from.y);
+        ctx.stroke();
+
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = this.axisColor;
+        ctx.fillText(this.zValueLabel(step.getCurrent()) + ' ', from.x - 5, from.y);
+
+        step.next();
+      }
+      ctx.lineWidth = 1;
+      from = this._convert3Dto2D(new Point3d(xText, yText, this.zMin));
+      to = this._convert3Dto2D(new Point3d(xText, yText, this.zMax));
       ctx.strokeStyle = this.axisColor;
       ctx.beginPath();
       ctx.moveTo(from.x, from.y);
-      ctx.lineTo(from.x - textMargin, from.y);
+      ctx.lineTo(to.x, to.y);
       ctx.stroke();
-
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = this.axisColor;
-      ctx.fillText(this.zValueLabel(step.getCurrent()) + ' ', from.x - 5, from.y);
-
-      step.next();
     }
-    ctx.lineWidth = 1;
-    from = this._convert3Dto2D(new Point3d(xText, yText, this.zMin));
-    to = this._convert3Dto2D(new Point3d(xText, yText, this.zMax));
-    ctx.strokeStyle = this.axisColor;
-    ctx.beginPath();
-    ctx.moveTo(from.x, from.y);
-    ctx.lineTo(to.x, to.y);
-    ctx.stroke();
 
     // draw x-axis
     ctx.lineWidth = 1;
@@ -8310,6 +8318,9 @@ return /******/ (function(modules) { // webpackBootstrap
    * This function can be used when the style is 'bar', 'bar-color', or 'bar-size'
    */
   Graph3d.prototype._redrawDataBar = function () {
+
+    this.dataBarRedrawOptions();
+
     var canvas = this.frame.canvas;
     var ctx = canvas.getContext('2d');
     var i, j, surface, corners;
@@ -8411,6 +8422,19 @@ return /******/ (function(modules) { // webpackBootstrap
       ctx.lineWidth = this._getStrokeWidth(point);
       ctx.strokeStyle = borderColor;
       ctx.fillStyle = color;
+      //
+      // custom modification in the case a row is being highlit
+      var colorFn = function colorFn(c, n, i, d) {
+        for (i = 3; i--; c[i] = d < 0 ? 0 : d > 255 ? 255 : d | 0) d = c[i] + n;return c;
+      };
+      if (this.whichXToHighlight !== undefined && point3d.x == this.whichXToHighlight) {
+        var vals = colorFn(color.match(numberPattern).map(function (num) {
+          return parseInt(num);
+        }), 110);
+        ctx.fillStyle = "RGB(" + vals[0] + "," + vals[1] + "," + vals[2] + ")";
+        ctx.strokeStyle = "lightcyan";
+      }
+
       // NOTE: we start at j=2 instead of j=0 as we don't need to draw the two surfaces at the backside
       for (j = 2; j < surfaces.length; j++) {
         surface = surfaces[j];
