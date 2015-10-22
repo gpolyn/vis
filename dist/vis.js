@@ -8395,6 +8395,11 @@ return /******/ (function(modules) { // webpackBootstrap
       var surfaces = [{ corners: top, center: Point3d.avg(bottom[0].point, bottom[2].point) }, { corners: [top[0], top[1], bottom[1], bottom[0]], center: Point3d.avg(bottom[1].point, bottom[0].point) }, { corners: [top[1], top[2], bottom[2], bottom[1]], center: Point3d.avg(bottom[2].point, bottom[1].point) }, { corners: [top[2], top[3], bottom[3], bottom[2]], center: Point3d.avg(bottom[3].point, bottom[2].point) }, { corners: [top[3], top[0], bottom[0], bottom[3]], center: Point3d.avg(bottom[0].point, bottom[3].point) }];
       point.surfaces = surfaces;
 
+      var numberPattern = /\d+/g;
+      var colorFn = function colorFn(c, n, i, d) {
+        for (i = 3; i--; c[i] = d < 0 ? 0 : d > 255 ? 255 : d | 0) d = c[i] + n;return c;
+      };
+
       // calculate the distance of each of the surface centers to the camera
       for (j = 0; j < surfaces.length; j++) {
         surface = surfaces[j];
@@ -8424,9 +8429,6 @@ return /******/ (function(modules) { // webpackBootstrap
       ctx.fillStyle = color;
       //
       // custom modification in the case a row is being highlit
-      var colorFn = function colorFn(c, n, i, d) {
-        for (i = 3; i--; c[i] = d < 0 ? 0 : d > 255 ? 255 : d | 0) d = c[i] + n;return c;
-      };
       if (this.whichXToHighlight !== undefined && point3d.x == this.whichXToHighlight) {
         var vals = colorFn(color.match(numberPattern).map(function (num) {
           return parseInt(num);
