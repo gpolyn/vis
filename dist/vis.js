@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-10-22
+ * @date    2015-11-19
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -7477,8 +7477,15 @@ return /******/ (function(modules) { // webpackBootstrap
       if (options.yValueLabel !== undefined) this.yValueLabel = options.yValueLabel;
       if (options.zValueLabel !== undefined) this.zValueLabel = options.zValueLabel;
 
-      // custom options
+      // custom options GP
+      if (options.dateXAdjustment !== undefined) this.dateXAdjustment = options.dateXAdjustment;
+      if (options.textAlignmentArray !== undefined) this.textAlignmentArray = options.textAlignmentArray;
+      if (options.hourAndDateLabels !== undefined) this.hourAndDateLabels = options.hourAndDateLabels;
+      if (options.hourLabels !== undefined) this.hourLabels = options.hourLabels;
+      if (options.numberOfDays !== undefined) this.numberOfDays = options.numberOfDays;
       if (options.dataBarRedrawOptions !== undefined) this.dataBarRedrawOptions = options.dataBarRedrawOptions;
+      if (options.yValueDateRowLabeling !== undefined) this.yValueDateRowLabeling = options.yValueDateRowLabeling;
+      if (options.yValueLabelsSecondLevel !== undefined) this.yValueLabelsSecondLevel = options.yValueLabelsSecondLevel;
       if (options.hideZAxis !== undefined) this.hideZAxis = options.hideZAxis;
 
       if (options.style !== undefined) {
@@ -7780,7 +7787,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
     // TODO: get the actual rendered style of the containerElement
     //ctx.font = this.containerElement.style.font;
-    ctx.font = 24 / this.camera.getArmLength() + 'px arial';
+    // GP
+    var fontHeight = 24 / this.camera.getArmLength();
+    ctx.font = fontHeight + 'px arial';
 
     // calculate the length for the short grid lines
     var gridLenX = 0.025 / this.scale.x;
@@ -7827,10 +7836,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
       yText = Math.cos(armAngle) > 0 ? this.yMin : this.yMax;
       text = this._convert3Dto2D(new Point3d(x, yText, this.zMin));
-      if (Math.cos(armAngle * 2) > 0) {
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'top';
-        text.y += textMargin;
+      // GP
+      if (Math.cos(armAngle * 2) > -0.29) {
+        // if (Math.cos(armAngle * 2) > 0) {
+        // ctx.textAlign = 'center';
+        // ctx.textBaseline = 'top';
+        // text.y += textMargin;
+        // GP
+        ctx.textBaseline = 'hanging';
+        text.y -= 2;
       } else if (Math.sin(armAngle * 2) < 0) {
         ctx.textAlign = 'right';
         ctx.textBaseline = 'middle';
@@ -7887,13 +7901,42 @@ return /******/ (function(modules) { // webpackBootstrap
         text.y += textMargin;
       } else if (Math.sin(armAngle * 2) > 0) {
         ctx.textAlign = 'right';
-        ctx.textBaseline = 'middle';
+        // GP
+        // ctx.textBaseline = 'middle';
+        ctx.textBaseline = 'top';
+        text.y -= 5;
       } else {
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
       }
+
       ctx.fillStyle = this.axisColor;
-      ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+
+      // GP
+      if (this.showYValueLabelsSecondLevel) {
+
+        ctx.textAlign = 'middle';
+
+        if (this.numberOfDays > 5) {
+
+          if (this.numberOfDays == 6) {
+            ctx.font = fontHeight - 2 + 'px arial';
+          } else {
+            ctx.font = fontHeight - 3.5 + 'px arial';
+          }
+
+          var additionalSpace = 10;
+
+          ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x, text.y + fontHeight + additionalSpace);
+          ctx.font = fontHeight + 'px arial';
+        } else {
+
+          ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x + this.dateXAdjustment, text.y + fontHeight);
+        }
+      }
+
+      // GP
+      ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x + this.textAlignmentArray[step.getCurrent()], text.y);
 
       step.next();
     }
@@ -8320,6 +8363,8 @@ return /******/ (function(modules) { // webpackBootstrap
   Graph3d.prototype._redrawDataBar = function () {
 
     this.dataBarRedrawOptions();
+    // GP MOD
+    this.yValueDateRowLabeling();
 
     var canvas = this.frame.canvas;
     var ctx = canvas.getContext('2d');
