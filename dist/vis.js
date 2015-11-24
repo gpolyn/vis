@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-11-19
+ * @date    2015-11-24
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -7901,10 +7901,16 @@ return /******/ (function(modules) { // webpackBootstrap
         text.y += textMargin;
       } else if (Math.sin(armAngle * 2) > 0) {
         ctx.textAlign = 'right';
-        // GP
-        // ctx.textBaseline = 'middle';
-        ctx.textBaseline = 'top';
-        text.y -= 5;
+        // GP NOV20
+        if (this.renderDateHourAxis) {
+          // GP
+          // ctx.textBaseline = 'middle';
+          ctx.textBaseline = 'top';
+          text.y -= 5;
+        } else {
+          // GP NOV20
+          ctx.textBaseline = 'middle';
+        }
       } else {
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
@@ -7913,7 +7919,8 @@ return /******/ (function(modules) { // webpackBootstrap
       ctx.fillStyle = this.axisColor;
 
       // GP
-      if (this.showYValueLabelsSecondLevel) {
+      // GP NOV 20
+      if (this.showYValueLabelsSecondLevel && this.renderDateHourAxis) {
 
         ctx.textAlign = 'middle';
 
@@ -7936,7 +7943,12 @@ return /******/ (function(modules) { // webpackBootstrap
       }
 
       // GP
-      ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x + this.textAlignmentArray[step.getCurrent()], text.y);
+      // GP NOV 20
+      if (this.renderDateHourAxis) {
+        ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x + this.textAlignmentArray[step.getCurrent()], text.y);
+      } else {
+        ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+      }
 
       step.next();
     }
@@ -8364,7 +8376,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
     this.dataBarRedrawOptions();
     // GP MOD
-    this.yValueDateRowLabeling();
+    // GP NOV 20
+    if (this.renderDateHourAxis) {
+      this.yValueDateRowLabeling();
+    }
 
     var canvas = this.frame.canvas;
     var ctx = canvas.getContext('2d');
