@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-11-24
+ * @date    2015-11-25
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -7478,6 +7478,8 @@ return /******/ (function(modules) { // webpackBootstrap
       if (options.zValueLabel !== undefined) this.zValueLabel = options.zValueLabel;
 
       // custom options GP
+      if (options.showYValueLabelsSecondLevel !== undefined) this.showYValueLabelsSecondLevel = options.showYValueLabelsSecondLevel;
+      if (options.renderDateHourAxis !== undefined) this.renderDateHourAxis = options.renderDateHourAxis;
       if (options.dateXAdjustment !== undefined) this.dateXAdjustment = options.dateXAdjustment;
       if (options.textAlignmentArray !== undefined) this.textAlignmentArray = options.textAlignmentArray;
       if (options.hourAndDateLabels !== undefined) this.hourAndDateLabels = options.hourAndDateLabels;
