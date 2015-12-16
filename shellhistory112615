@@ -1,0 +1,500 @@
+  486  ionic serve
+  487  ls
+  488  ls
+  489  cd ..
+  490  ls
+  491  rm -rf ionicTests
+  492  rm -rf myApp
+  493  ls
+  494  ionic start myTabsApp tabs
+  495  ls
+  496  cd myTabsApp/
+  497  ionic platform add android
+  498  ionic build android
+  499  ionic serve
+  500  exit
+  501  ls
+  502  vim demando_data.json 
+  503  history | grep run
+  504  vim demando_data.json 
+  505  vim demando_data.json 
+  506  vim www/css/style.css 
+  507  vim demando_data.json 
+  508  history | grep sync
+  509  vim demando_data.json 
+  510  vim www/js/services.js 
+  511  vim demando_data.json 
+  512  vim demando_data.json 
+  513  vim demando_data.json 
+  514  vim demando_data.json 
+  515  vim demando_data.json 
+  516  vim demando_data.json 
+  517  vim demando_data.json 
+  518  vim demando_data.json 
+  519  vim demando_data.json 
+  520  vim demando_data.json 
+  521  vim demando_data.json 
+  522  node
+  523  ls
+  524  history
+  525  pwd
+  526  cd ..
+  527  ls
+  528  cd ..
+  529  ls
+  530  cd ..
+  531  ls
+  532  cd projects/
+  533  ls
+  534  cd demando/
+  535  ls
+  536  grep -r heroku .
+  537  ls
+  538  ls demando-realtime/
+  539  cs demando-realtime/
+  540  cd demando-realtime/
+  541  git status
+  542  git log
+  543  cd ..
+  544  ls
+  545  cd all-in-one/
+  546  git status
+  547  git log
+  548  cd ..
+  549  ls
+  550  pwd
+  551  cd ..
+  552  ls
+  553  cd ..
+  554  ls
+  555  cd front-end/
+  556  ls
+  557  cd projects
+  558  ls
+  559  cd ../projects/
+  560  ls
+  561  git clone https://github.com/angular/angular-seed.git
+  562  node --version
+  563  nvm use 0.10
+  564  ls
+  565  ls
+  566  rm -rf angular-seed/
+  567  git clone --depth=1 https://github.com/angular/angular-seed.git wanted
+  568  ls
+  569  cd wanted
+  570  ls
+  571  git status
+  572  npm install
+  573  sudo bower install --allow-root
+  574  npm install
+  575  npm start
+  576  ls
+  577  cd ..
+  578  ls
+  579  rm -rf wanted
+  580  sudo rm -rf wanted
+  581  ls
+  582  npm install -g grunt-cli bower yo generator-karma generator-angular
+  583  nvm use 0.12
+  584  nvm ls
+  585  nvm
+  586  nvm current
+  587  nvm install v0.12
+  588* 
+  589* [Bnpm install -g grunt-cli bower yo generator-karma generator-angular
+  590  sudo npm install -g grunt-cli bower yo generator-karma generator-angular --allow-root
+  591  ls
+  592  mkdir wanted && cd $_
+  593  yo angular wanted
+  594  grunt serve
+  595  sudo bower install --allow-root
+  596  grunt serve
+  597  grunt serve
+  598  ls
+  599  node web.js 
+  600  vim web.js 
+  601  vim web.js 
+  602  vim web.js 
+  603  node web.js 
+  604  node web.js ls
+  605  ls
+  606  ls
+  607  vim app/
+  608  vim bower.json 
+  609  sudo bower install angular-bootstrap --allow-root --save
+  610  vim app/index.html 
+  611  vim app/scripts/app.js 
+  612  vim app/views/vis.html 
+  613  vim app/views/vis.html 
+  614  sudo bower install angular-rangeslider --save --allow-root
+  615  vim app/index.html 
+  616  vim app/scripts/app.js 
+  617  ls app/styles/
+  618  vim app/styles/
+  619  vim app/styles/
+  620  ls
+  621  vim app/views/
+  622  vim Gruntfile.js 
+  623  history
+  624  sudo bower uninstall angular-rangeslider --save --allow-root
+  625  sudo bower uninstall angular-slider --save --allow-root
+  626  sudo bower install angular-slider --save --allow-root
+  627  ls bower_components/
+  628  ls bower_components/angular-slider/
+  629  vim app/index.html 
+  630  ls bower_components/angular-slider/
+  631  ls bower_components
+  632  ls bower_components/angular-slider/
+  633  vim bower_components/angular-slider/
+  634  sudo bower uninstall angular-slider --save --allow-root
+  635  sudo bower install angularjs-slider --save --allow-root
+  636  ls bower_components/angularjs-slider/
+  637  ls bower_components/angularjs-slider/dist/
+  638  vim app/index.html 
+  639  vim app/scripts/app.js 
+  640  vim app/scripts/controllers/vis.js 
+  641  sudo bower install angular-touch --save --allow-root
+  642  ls
+  643  vim app/scripts/app.js 
+  644  vim bower_components/
+  645  vim app/views/vis.html 
+  646  git status
+  647  git branch
+  648  git add .
+  649  git log
+  650  git commit -m "quite a bit of additional work"
+  651  git remote add origin https://github.com/gpolyn/wanted.git
+  652  git push -u origin master
+  653  ls
+  654  vim app/scripts/
+  655  git status
+  656  git diff
+  657  vim app/
+  658  history
+  659  git add .
+  660  git commit -m "even more crap"
+  661  git push -u origin master
+  662  vim app/
+  663  ls
+  664  vim bower.json 
+  665  ls bower.json 
+  666  vim bower.json 
+  667  ls
+  668  vim app/
+  669  ls app/views
+  670  touch app/views/configuration-pane.html
+  671  vim app/views/configuration-pane.html
+  672  vim app/views/nvd3.html 
+  673  vim app/scripts/controllers/nvd3.js 
+  674  vim app/views/nvd3.html 
+  675  git add .
+  676  git commit -m "bunch mo shit"
+  677  history
+  678  git push -u origin master
+  679  vim app/scripts/controllers/
+  680  git add .
+  681  git commit -m "mo' money to burn"
+  682  history
+  683  git push -u origin master
+  684  vim app/views/
+  685  cp app/views/configuration-pane.html app/views/configuration-pane-alt.html 
+  686  vim app/views/nvd3.html 
+  687  vim app/views/configuration-pane-alt.html 
+  688  vim app/index.html 
+  689  ls app/views/
+  690  vim app/views/chart.html 
+  691  vim app/scripts/
+  692  touch app/views/calendar.html
+  693  vim app/views/calendar.html
+  694  vim app/views/calendar.html
+  695  vim app
+  696  vim app/views
+  697  vim app/views/calendar.html
+  698  vim app/scripts/app.js 
+  699  cp app/scripts/controllers/nvd3.js app/scripts/controllers/calendar.js
+  700  vim app/scripts/controllers/calendar.js 
+  701  vim app/index.html 
+  702  vim app/scripts/app.js 
+  703  vim app/index.html 
+  704  vim app/scripts/controllers/calendar.js 
+  705  vim app/views/calendar.html 
+  706  ls app/views/
+  707  touch app/views/add-meal-partial.html
+  708  vim app/views/add-meal-partial.html 
+  709  grep app ng-include
+  710  grep app ng-include /
+  711  grep app ng-include .
+  712  grep app ng-include -r
+  713  grep -r ng-include app
+  714  vim app/views/calendar.html 
+  715  touch app/views/meal-discount-partial.html
+  716  vim app/views/meal-discount-partial.html 
+  717  vim app/views/calendar.html 
+  718  git add .
+  719  git commit -m "added rudimentary calendaring"
+  720  history
+  721  git push -u origin master
+  722  vim app/scripts/
+  723  ls
+  724  ls node_modules/
+  725  ls
+  726  cat bower.json 
+  727  node
+  728  vim app/scripts/controllers/
+  729  vim app/scripts/controllers/
+  730  node
+  731  ls
+  732  ls bower_components/
+  733  ls bower_components/firebase/
+  734  node
+  735  vim app/scripts/controllers/
+  736  node
+  737  ls bower_components/
+  738  node
+  739  ls bower_components/angularfire/
+  740  ls bower_components/angularfire/dist
+  741  ls bower_components/angularfire/dist/angularfire.js
+  742  node
+  743  ls node_modules/
+  744  npm install firebase -g
+  745  node
+  746  node
+  747  ls
+  748  ls /tmp
+  749  touch /tmp/fb.js
+  750  vim /tmp/fb.js
+  751  vim /tmp/fb.js
+  752  node /tmp/fb.js 
+  753  vim /tmp/fb.js
+  754  node /tmp/fb.js 
+  755  vim /tmp/fb.js
+  756  vim /tmp/fb.js
+  757  node /tmp/fb.js 
+  758  vim /tmp/fb.js
+  759  node /tmp/fb.js 
+  760  node /tmp/fb.js 
+  761  vim /tmp/fb.js
+  762  node /tmp/fb.js 
+  763  vim /tmp/fb.js
+  764  node /tmp/fb.js 
+  765  vim /tmp/fb.js
+  766  node /tmp/fb.js 
+  767  vim /tmp/fb.js
+  768  node /tmp/fb.js 
+  769  vim /tmp/fb.js
+  770  vim /tmp/fb.js
+  771  node /tmp/fb.js 
+  772  node /tmp/fb.js 
+  773  vim /tmp/fb.js
+  774  node /tmp/fb.js 
+  775  vim /tmp/fb.js
+  776  cp /tmp/fb.js /tmp/fb2.js
+  777  vim /tmp/fb2.js 
+  778  node /tmp/fb2.js 
+  779  git status
+  780  git branch
+  781  git add .
+  782  git commit -m "cleaning up vis"
+  783  vim .gitignore 
+  784  git add .
+  785  git commit -m "update to gitignore"
+  786  vim .gitignore 
+  787  history
+  788  ls /tmp
+  789  history
+  790  cd /Users/gallagherpolyn/code/projects
+  791  ls
+  792  mkdir vis
+  793  cd vis
+  794  cd ..
+  795  ls
+  796  rmdir vis/
+  797  git clone https://github.com/gpolyn/vis.git
+  798  git remote -v
+  799  cd vis/
+  800  git remote -v
+  801  git remote add upstream https://github.com/almende/vis.git
+  802  git remote -v
+  803  git fetch upstream
+  804  git checkout master
+  805  git merge upstream/master
+  806  git status
+  807  git push origin master
+  808  ls
+  809  git status
+  810  git checkout -b "my mods to 3d"
+  811  git checkout -b Graph3d_mods
+  812  git branch
+  813  ls
+  814  cd lib/
+  815  ls
+  816  graph3d/
+  817  cd graph3d/
+  818  ls
+  819  vim Graph3d.js 
+  820  l
+  821  ls
+  822  git status
+  823  cd ..
+  824  ls
+  825  cd ..
+  826  ls
+  827  git status
+  828  git branch
+  829  git add .
+  830  git commit -m "added x value to highlight"
+  831  history
+  832  git branch
+  833  git push origin Graph3d_mods
+  834  history
+  835  npm install
+  836  npm run build
+  837  git status
+  838  git add .
+  839  git commit -m "build I need to npm install this repo, elsewhere"
+  840  git status
+  841  git push origin Graph3d_mods
+  842  ls
+  843  git branch
+  844  ls
+  845  vim lib/
+  846  pwd
+  847  git status
+  848  git status
+  849  ls
+  850  cd lib
+  851  ls
+  852  vim graph3d/
+  853  cd ..
+  854  ls
+  855  git status
+  856  git add .
+  857  git commit -m "additional (hacks) on Graph3d"
+  858* 
+  859  git push origin Graph3d_mods
+  860  history | grep build
+  861  history | grep grunt
+  862  ls
+  863  vim README.md 
+  864  history
+  865  npm run build
+  866  git push origin Graph3d_mods
+  867  ls
+  868  vim lib/
+  869  gulp
+  870  git push origin Graph3d_mods
+  871  git branch
+  872  vim dist/
+  873  npm run build
+  874  ls
+  875  vim dist/
+  876  git remote -v
+  877  git push origin Graph3d_mods
+  878  git status
+  879  git add .
+  880* 
+  881  git push origin Graph3d_mods
+  882  vim lib/
+  883  vim lib/
+  884  git add .
+  885  npm run build
+  886  git add .
+  887  git commit -m "corrected an error in Graph3d"
+  888  git status
+  889  git push origin Graph3d_mods
+  890  history | grep fb
+  891  la /tmp
+  892  ls /tmp
+  893  ls ~/Desktop/
+  894  vim ~/Desktop/fb.py 
+  895  touch writeFbToFile.py
+  896  vim writeFbToFile.py 
+  897  python writeFbToFile.py 
+  898  vim writeFbToFile.py 
+  899  python writeFbToFile.py 
+  900  vim writeFbToFile.py 
+  901  python writeFbToFile.py 
+  902  vim writeFbToFile.py 
+  903  python writeFbToFile.py 
+  904  vim writeFbToFile.py 
+  905  python writeFbToFile.py 
+  906  ls ~/Desktop/
+  907  ls
+  908  ls
+  909  cat firbase.txt 
+  910  ls
+  911  cp writeFbToFile.py ~/Desktop/
+  912  rm writeFbToFile.py 
+  913  ls ~/Desktop/
+  914  ls
+  915  ls ..
+  916  ls ../wanted
+  917  ls ../wanted/test
+  918  mkdir ../wanted/test/fixtures
+  919  mv firbase.txt ../wanted/test/fixtures/data.json
+  920  ls
+  921  vim ~/Desktop/writeFbToFile.py 
+  922  python ~/Desktop/writeFbToFile.py 
+  923  vim ~/Desktop/writeFbToFile.py 
+  924  python ~/Desktop/writeFbToFile.py 
+  925  ls
+  926  history | grep mv
+  927  mv firebase.txt ../wanted/test/fixtures/data.json
+  928  ls
+  929  vim /Users/gallagherpolyn/code/projects/wanted/node_modules/vis/dist
+  930  ls
+  931  git status
+  932  history
+  933  history | grep git
+  934  git commit -m "further customizations to Graph3d"
+  935  git add .
+  936  git commit -m "further customizations to Graph3d"
+  937  git status
+  938  git push origin Graph3d_mods
+  939  ls
+  940  history | grep build
+  941  history | grep git
+  942  ls
+  943  vim README.md 
+  944  git status
+  945  history | grep npm
+  946  npm run build
+  947  git status
+  948  git add .
+  949  git commit -m "ran build after commit"
+  950  git push origin Graph3d_mods
+  951  ls
+  952  history
+  953  ls
+  954  ls
+  955  vim lib/
+  956  git status
+  957  git add .
+  958  git commit -m "more enhancements"
+  959  history 
+  960  npm run build
+  961  history
+  962  git push origin Graph3d_mods
+  963  vim lib/
+  964  git status
+  965  git add . 
+  966  git commit -m "ran build"
+  967  history
+  968  git push origin Graph3d_mods
+  969  ls
+  970  vim lib/
+  971  history 
+  972  git add .
+  973  git commit -m "constructor options updated"
+  974  npm run build
+  975  git add .
+  976  git status
+  977  git commit -m "build after constructor options updated"
+  978  git status
+  979  history | grep push
+  980  git push origin Graph3d_mods
+  981  ls
+  982  history
+  983  ;s
+  984  ls
+  985  history > shellhistory112615
