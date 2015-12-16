@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-11-25
+ * @date    2015-12-16
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -7489,6 +7489,7 @@ return /******/ (function(modules) { // webpackBootstrap
       if (options.yValueDateRowLabeling !== undefined) this.yValueDateRowLabeling = options.yValueDateRowLabeling;
       if (options.yValueLabelsSecondLevel !== undefined) this.yValueLabelsSecondLevel = options.yValueLabelsSecondLevel;
       if (options.hideZAxis !== undefined) this.hideZAxis = options.hideZAxis;
+      if (options.specialYLegend !== undefined) this.specialYLegend = options.specialYLegend; // DEC13
 
       if (options.style !== undefined) {
         var styleNumber = this._getStyleNumber(options.style);
@@ -7585,10 +7586,11 @@ return /******/ (function(modules) { // webpackBootstrap
       this._redrawDataLine();
     } else if (this.style === Graph3d.STYLE.BAR || this.style === Graph3d.STYLE.BARCOLOR || this.style === Graph3d.STYLE.BARSIZE) {
       this._redrawDataBar();
+      this._redrawSpecialYLegend(); // DEC16
     } else {
-      // style is DOT, DOTLINE, DOTCOLOR, DOTSIZE
-      this._redrawDataDot();
-    }
+        // style is DOT, DOTLINE, DOTCOLOR, DOTSIZE
+        this._redrawDataDot();
+      }
 
     this._redrawInfo();
     this._redrawLegend();
@@ -7602,6 +7604,31 @@ return /******/ (function(modules) { // webpackBootstrap
     var ctx = canvas.getContext('2d');
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  };
+
+  /**
+   * Redraw the special Y legend adding supplemental info // DEC16
+   */
+  Graph3d.prototype._redrawSpecialYLegend = function () {
+
+    if (this.specialYLegend && this.specialYLegend.length > 0) {
+
+      var canvas = this.frame.canvas;
+      var ctx = canvas.getContext('2d');
+
+      // GP MOD DEC13
+      var height = Math.max(this.frame.clientHeight * 0.25, 100);
+      var top = this.margin;
+      var right = this.frame.clientWidth - this.margin;
+      var left = right - 20;
+      var bottom = top + height;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = "#585858";
+      ctx.textBaseline = 'top';
+      ctx.font = '16px arial';
+      var label = this.specialYLegend;
+      ctx.fillText(label, this.margin + 2, this.frame.clientHeight - 25);
+    }
   };
 
   /**
@@ -7855,7 +7882,17 @@ return /******/ (function(modules) { // webpackBootstrap
         ctx.textBaseline = 'middle';
       }
       ctx.fillStyle = this.axisColor;
-      ctx.fillText('  ' + this.xValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+
+      // GP MOD DEC15 highlight distance in red
+      if (this.whichXToHighlight == step.getCurrent()) {
+        var usualFont = ctx.font;
+        ctx.fillStyle = "red";
+        ctx.font = '16px arial';
+        ctx.fillText('  ' + this.xValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+        ctx.font = usualFont;
+      } else {
+        ctx.fillText('  ' + this.xValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+      }
 
       step.next();
     }
