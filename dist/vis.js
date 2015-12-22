@@ -5,7 +5,7 @@
  * A dynamic, browser-based visualization library.
  *
  * @version 4.9.0
- * @date    2015-12-16
+ * @date    2015-12-22
  *
  * @license
  * Copyright (C) 2011-2015 Almende B.V, http://almende.com
@@ -7491,6 +7491,21 @@ return /******/ (function(modules) { // webpackBootstrap
       if (options.hideZAxis !== undefined) this.hideZAxis = options.hideZAxis;
       if (options.specialYLegend !== undefined) this.specialYLegend = options.specialYLegend; // DEC13
 
+      if (options.innerYValueLabels !== undefined) {
+        // DEC19
+        this.innerYValueLabels = options.innerYValueLabels;
+      }
+
+      if (options.outerYValueLabels !== undefined) {
+        // DEC19
+        this.outerYValueLabels = options.outerYValueLabels;
+      }
+
+      if (options.farOuterYValueLabels !== undefined) {
+        // DEC19
+        this.farOuterYValueLabels = options.farOuterYValueLabels;
+      }
+
       if (options.style !== undefined) {
         var styleNumber = this._getStyleNumber(options.style);
         if (styleNumber !== -1) {
@@ -7813,7 +7828,15 @@ return /******/ (function(modules) { // webpackBootstrap
         yOffset,
         xMin2d,
         xMax2d;
-
+    var one,
+        // DEC18
+    two,
+        three,
+        four = 0,
+        five = 0,
+        six,
+        seven,
+        eight;
     // TODO: get the actual rendered style of the containerElement
     //ctx.font = this.containerElement.style.font;
     // GP
@@ -7959,37 +7982,110 @@ return /******/ (function(modules) { // webpackBootstrap
 
       // GP
       // GP NOV 20
-      if (this.showYValueLabelsSecondLevel && this.renderDateHourAxis) {
+      // if (this.showYValueLabelsSecondLevel && this.renderDateHourAxis) {
 
-        ctx.textAlign = 'middle';
+      //   ctx.textAlign = 'middle';
 
-        if (this.numberOfDays > 5) {
+      //   if (this.numberOfDays > 5){
 
-          if (this.numberOfDays == 6) {
-            ctx.font = fontHeight - 2 + 'px arial';
-          } else {
-            ctx.font = fontHeight - 3.5 + 'px arial';
-          }
+      //     if (this.numberOfDays == 6){
+      //       ctx.font = (fontHeight - 2) + 'px arial';
+      //     } else {
+      //       ctx.font = (fontHeight - 3.5) + 'px arial';
+      //     }
 
-          var additionalSpace = 10;
+      //     var additionalSpace = 10;
 
-          ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x, text.y + fontHeight + additionalSpace);
-          ctx.font = fontHeight + 'px arial';
-        } else {
+      //     ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x, text.y + fontHeight + additionalSpace);
+      //     ctx.font = fontHeight + 'px arial';
 
-          ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x + this.dateXAdjustment, text.y + fontHeight);
-        }
+      //   } else {
+
+      //     ctx.fillText(this.yValueLabelsSecondLevel(step.getCurrent()), text.x + this.dateXAdjustment, text.y + fontHeight);
+      //   }
+
+      // }
+      // DEC22
+      if (this.innerYValueLabels == undefined) {
+        ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x, text.y);
       }
 
       // GP
       // GP NOV 20
-      if (this.renderDateHourAxis) {
-        ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x + this.textAlignmentArray[step.getCurrent()], text.y);
-      } else {
-        ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x, text.y);
-      }
+      // if (this.renderDateHourAxis){
+      //   ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x + this.textAlignmentArray[step.getCurrent()], text.y);
+
+      // } else {
+      //   ctx.fillText('  ' + this.yValueLabel(step.getCurrent()) + '  ', text.x, text.y);
+      // }
 
       step.next();
+    }
+
+    if (this.farOuterYValueLabels) {
+
+      four = this;
+      six = this.farOuterYValueLabels.length;
+      seven = yValue3DPoints[0].x; // this value won't change
+      eight = yValue3DPoints[0].z; // this value won't change
+
+      for (var t = 0; t < six; t++) {
+        // one = yValue3DPoints[four.altOuterYValueLabels[t].firstPosition];
+        one = yValue3DPoints[four.farOuterYValueLabels[t].firstPosition].y;
+        // console.log(one);
+        // two = yValue3DPoints[four.altOuterYValueLabels[t].lastPosition];
+        two = yValue3DPoints[four.farOuterYValueLabels[t].lastPosition].y;
+        // console.log(two)
+        // three = Point3d.avg(two, one);
+        three = (one + two) / 2;
+        // console.log(three)
+        // five = four._convert3Dto2D(three);
+        five = four._convert3Dto2D(new Point3d(seven, three, eight));
+        ctx.fillText(four.farOuterYValueLabels[t].shortLabel, five.x, five.y + fontHeight * 2 + 6);
+      }
+    }
+
+    if (this.outerYValueLabels) {
+
+      four = this;
+      six = this.outerYValueLabels.length;
+      seven = yValue3DPoints[0].x; // this value won't change
+      eight = yValue3DPoints[0].z; // this value won't change
+
+      for (var t = 0; t < six; t++) {
+        // one = yValue3DPoints[four.altOuterYValueLabels[t].firstPosition];
+        one = yValue3DPoints[four.outerYValueLabels[t].firstPosition].y;
+        // console.log(one);
+        // two = yValue3DPoints[four.altOuterYValueLabels[t].lastPosition];
+        two = yValue3DPoints[four.outerYValueLabels[t].lastPosition].y;
+        // console.log(two)
+        // three = Point3d.avg(two, one);
+        three = (one + two) / 2;
+        // console.log(three)
+        // five = four._convert3Dto2D(three);
+        five = four._convert3Dto2D(new Point3d(seven, three, eight));
+        ctx.fillText(four.outerYValueLabels[t].shortLabel, five.x, five.y + fontHeight + 3);
+      }
+    }
+
+    if (this.innerYValueLabels) {
+
+      four = this;
+      six = this.innerYValueLabels.length;
+      seven = yValue3DPoints[0].x; // this value won't change
+      eight = yValue3DPoints[0].z; // this value won't change
+
+      for (var t = 0; t < six; t++) {
+        one = yValue3DPoints[four.innerYValueLabels[t].firstPosition].y;
+        // console.log(one);
+        two = yValue3DPoints[four.innerYValueLabels[t].lastPosition].y;
+        // console.log(two)
+        three = (one + two) / 2;
+        // console.log(three)
+        // five = four._convert3Dto2D(three);
+        five = four._convert3Dto2D(new Point3d(seven, three, eight));
+        ctx.fillText(four.innerYValueLabels[t].shortLabel, five.x, five.y);
+      }
     }
 
     // draw z-grid lines and axis
