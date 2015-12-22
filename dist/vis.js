@@ -7836,6 +7836,7 @@ return /******/ (function(modules) { // webpackBootstrap
         five = 0,
         six,
         seven,
+        yValue3DPoints = [],
         eight;
     // TODO: get the actual rendered style of the containerElement
     //ctx.font = this.containerElement.style.font;
@@ -7957,6 +7958,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
       xText = Math.sin(armAngle) > 0 ? this.xMin : this.xMax;
       text = this._convert3Dto2D(new Point3d(xText, step.getCurrent(), this.zMin));
+      yValue3DPoints.push(new Point3d(xText, step.getCurrent(), this.zMin));
       if (Math.cos(armAngle * 2) < 0) {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'top';
